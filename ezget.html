@@ -1,0 +1,160 @@
+<!doctype html public "-//w3c//dtd html 4.0 transitional//en">
+<html>
+<head>
+   <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <meta name="GENERATOR" content="Mozilla/4.61 [en] (WinNT; I) [Netscape]">
+   <title>EzGet entry page</title>
+</head>
+<body text="#000000" bgcolor="#FFFFFF" link="#0000FF" vlink="#551A8B" alink="#0000FF">
+
+<h1>
+<img SRC="eztran.gif" height=74 width=233></h1>
+
+<blockquote>
+<h1>
+<font size=+2>EzGet: A Software Library to Facilitate Data Retrieval</font></h1>
+</blockquote>
+
+<blockquote>
+<hr>
+<p>A FORTRAN library called EzGet has been developed at PCMDI to facilitate
+retrieval of modeled and observed climate data stored in popular formats
+including <a href="../../drach/DRS.html">DRS</a>, <a href="http://www.unidata.ucar.edu/packages/netcdf/">netCDF</a>,
+<a href="http://grads.iges.org/grads">GrADS</a>,
+and, if a control file is supplied, GRIB. You can specify how the data
+should be structured and whether it should undergo a grid transformation
+before you receive it, even when you know little about the original structure
+of the stored data (e.g., its original dimension order, grid, and domain).
+<p>The EzGet library comprises a set of subroutines that can be linked
+to any FORTRAN program. EzGet reads files through the <a href="../../drach/cdunif.html">cdunif</a>
+interface, but use of EzGet does not require familiarity with cdunif. The
+main advantages of using EzGet instead of the lower level cdunif library
+include:
+<blockquote>
+<li>
+Substantial error trapping capabilities and detailed error messages</li>
+
+<li>
+Versatile capability of conveniently selecting data from specified regions
+(e.g., oceans, North America, all land areas north of 45 degrees latitude,
+etc.)</li>
+
+<li>
+Ability to map data to a new grid at the time it is retrieved by EzGet</li>
+
+<li>
+Automatic creation of ``weights'' for use in subsequent averaging or masking
+of data</li>
+
+<li>
+Increased control in specifying the domain of the data to be retrieved.</li>
+</blockquote>
+Taken together these capabilities will simplify the process of writing
+programs for accessing data stored in different formats and structures,
+including all the observed data sets and the model output from various
+model intercomparison projects (AMIP, PMIP, CMIP, etc.) archived at PCMDI.
+<p>EzGet is updated and enhanced from time to time. Information on differences
+between the most recent and earlier versions of EzGet along with a description
+of current limitations of the software is available: see <a href="ezget_bugs.html">updates,
+bugs and limitations</a>.
+<p>If you wish to be informed of updated versions of EzGet (along with
+a description of any bugs discovered), please <a href="ezget_form.html">register</a>.
+(If you register, you may expect to be sent email, but not often--no more
+than a few times a year.)&nbsp;<a NAME="ftp"></a>
+<p>EzGet serves a different purpose from other software tools developed
+at PCMDI. EzGet is meant to be used in conjunction with FORTRAN programs
+that need access to data. For direct viewing and interactive manipulation
+of data, a Visualization and Computation System (<a href="../vcs/index.html">VCS</a>)
+has been developed. To transfer data to files, formats, or visualization
+systems, the Data and Dimensions Interface (<a href="../../williams/ddi/ddi.html">DDI</a>)
+has been developed. Neither VCS nor DDI can be called from a FORTRAN program.
+<p>The EzGet software is currently available for the following platforms/operating
+systems: Sun/SunOS 4.1.3, Sun/Solaris 2.7, IBM RS6000/AIX 3.2, HP/HP-UX
+9.0, SGI Irix 5.3, Cray C90, LINUX/Redhat 6.1.
+<p>You may obtain via ftp the FORTRAN libraries and documentation comprising
+EzGet:
+<ul>
+<li>
+download documentation (EzGet user's manual and an ascii README file describing
+how to install the software):</li>
+
+<ul>
+<li>
+<a href="ftp://sprite.llnl.gov/pub/ktaylor/ezget/ezget1.2_doc_ps.tar">download
+postscript</a> (containing the postscript version of the documentation;
+<i>~730k
+</i>)</li>
+
+<li>
+<a href="ftp://sprite.llnl.gov/pub/ktaylor/ezget/ezget1.1.3_doc_pdf.tar">download
+pdf</a> (containing the pdf version of the documentation; <i>~560k </i>)</li>
+
+<li>
+<a href="ftp://sprite.llnl.gov/pub/ktaylor/ezget/ezget1.2_doc_tex.tar">download
+tex </a> (containing the tex [latex] version of the documentation);
+<i>~520k
+</i>)</li>
+
+<br>&nbsp;</ul>
+
+<li>
+<a href="ftp://sprite.llnl.gov/pub/ktaylor/ezget/ezget_examples.tar.Z">download
+examples</a> (containing sample FORTRAN subroutines that rely on EzGet
+to retrieve data; <i>~1500k </i>)</li>
+
+<br>&nbsp;
+<li>
+<a href="ftp://sprite.llnl.gov/pub/ktaylor/ezget/amip_geog.tar.Z">download
+geography files</a> (needed if you want to extract data from individual
+geographical regions, such as N. America, Africa, North Pacific Ocean,
+etc. for AMIP models; <i>~40k </i>)</li>
+
+<br>&nbsp;
+<li>
+Obtain the EzGet library (containing the EzGet, cdunif and DRS libraries)
+appropriate for your platform:</li>
+
+<ul>
+<li>
+<a href="ftp://sprite.llnl.gov/pub/ktaylor/ezget/ezget1.1.3_sunos.tar.Z">download
+Sun/SunOS 4.1.3 library </a>(<i> ~450k </i>)</li>
+
+<li>
+<a href="ftp://sprite.llnl.gov/pub/ktaylor/ezget/ezget1.2_solaris.tar.Z">download
+Sun/Solaris 2.7 library </a>(<i> ~630k </i>)</li>
+
+<li>
+<a href="ftp://sprite.llnl.gov/pub/ktaylor/ezget/ezget1.1.3_ibm.tar.Z">download
+IBM RS6000/AIX 3.2 library </a>(<i> ~510k </i>)</li>
+
+<li>
+<a href="ftp://sprite.llnl.gov/pub/ktaylor/ezget/ezget1.1.3_hp.tar.Z">download
+HP/HP-UX 9.0 library </a>(<i> ~430k </i>)</li>
+
+<li>
+<a href="ftp://sprite.llnl.gov/pub/ktaylor/ezget/ezget1.1.3_sgi.tar.Z">download
+SGI Irix 5.3 library </a>(<i> ~550k </i>)</li>
+
+<li>
+<a href="ftp://sprite.llnl.gov/pub/ktaylor/ezget/ezget1.1.4_CrayC90.tar.Z">download
+Cray C90 library </a>(<i> ~710k </i>)</li>
+
+<li>
+<a href="ftp://sprite.llnl.gov/pub/ktaylor/ezget/ezget1.2_linux_2.2_libc6.tar.gz">download
+linux 2.2/Redhat 6.1 (compiled under Portland Group Fortran driver 3.1) library </a>(<i> ~370k </i>)</li>
+</ul>
+</ul>
+If you will be reading data stored in netCDF format, you will need to obtain
+the <a href="ftp://ftp.unidata.ucar.edu/pub/netcdf/">netCDF</a> library.
+<p>Once you have transferred the EzGet files to your computer, you should
+uncompress and extract the individual files from the tarred files (<a href="ezget_details.html">further
+information</a> available).
+<br>&nbsp;</blockquote>
+<font size=-1><a href="../../software/index.html">Return to Software Tools</a></font>
+<br><font size=-1><a href="../../PCMDI.html">Return to PCMDI home page</a></font>
+<p><font size=-1>Last update August 11, 1997. For questions or comments
+on EzGet, contact Karl Taylor (<a href="mailto:taylor13@llnl.gov">taylor13@llnl.gov</a>)</font>
+<p><font size=-1><a href="http://www.llnl.gov/disclaimer.html">LLNL Disclaimers</a></font>
+<br><font size=-1>UCRL-ID-123716</font>
+</body>
+</html>

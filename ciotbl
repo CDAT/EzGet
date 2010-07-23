@@ -1,0 +1,11 @@
+
+c   ***  ciotbl  ***
+
+      integer maxiodev
+      parameter (maxiodev=4)
+
+      integer iofiluse
+      character*120 iofilnam
+
+      common /ciotbl/iofiluse(maxiodev), iofilnam(maxiodev)
+

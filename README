@@ -1,0 +1,376 @@
+***************************
+
+EzGet Summary
+
+***************************
+
+You have acquired from the Program for Climate Model Diagnosis and
+Intercomparison (PCMDI) software known as EzGet, which facilitates
+retrieval of data stored in popular formats (including DRS, netCDF,
+GrADS, and if a control file is supplied, GRIB).  EzGET (pronounced
+easy-get) is specifically designed to access climate data and climate
+model output.  You can specify how the data should be structured and
+whether it should  undergo a grid transformation before you receive it,
+even when you know little about the structure of the stored data
+(i.e., its dimension order, grid, and domain).
+
+EzGet comprises a set of subroutines that can be linked to any FORTRAN
+program.  EzGet reads files through the cdunif interface, but use of
+EzGet does not require familiarity with cdunif.  The main advantages of
+using this software instead of the lower level cdunif library include:
+
+   * Substantial error trapping capabilities and detailed error messages
+
+   * Versatile capability of conveniently selecting data from specified
+     regions (e.g., oceans, North America, all land areas north of 45
+     degrees latitude, etc.)
+
+   * Ability to map data to a new grid at the time it is retrieved by
+     EzGet
+
+   * Automatic creation of ``weights'' for use in subsequent averaging
+     or masking of data
+
+   * Increased control in specifying the domain, grid and structure of      
+     the retrieved data.
+
+Taken together these capabilities will simplify the process of writing
+programs for accessing data stored in different formats and structures,
+including all the observed data sets and the model output from various
+model intercomparison projects (AMIP, PMIP, CMIP, etc.) archived at
+PCMDI.
+
+EzGet software and documentation are are available through the PCMDI
+web site:
+ 
+   home page: http: //www-pcmdi.llnl.gov/ 
+   EzGet location: http://www-pcmdi.llnl.gov/ktaylor/ezget/ezget.html
+
+The software currently is available for the following
+platforms/operating systems:
+
+Sun/SunOS 4.1.3
+Sun/Solaris 2.4
+IBM RS6000/AIX 3.2
+HP/HP-UX 9.0
+SGI IRIX 5.3
+
+It should also be available shortly on:
+Cray/Unicos
+DEC Alpha/OSF
+
+
+
+***************************
+
+Installation
+
+***************************
+
+Obtain from the PCMDI web site the tarred and compressed file
+containing the EZGET, DRS and cdunif libraries appropriate to the
+platform (computer) you will be using along with documentation,
+geography data from AMIP models, examples and sample data.
+
+You should uncompress the tar files.  For example for the HP version
+enter:
+
+uncompress ezget1.1.3_doc.tar.Z
+uncompress amip_geog.tar.Z
+uncompress ezget_examples.tar.Z
+uncompress ezget1.1.3_hp.tar.Z
+
+Then you should extract the files from the tarred library files,
+examples files, and document files.  For example for the HP version
+enter:
+
+tar -xvf ezget1.1.3_doc.tar
+tar -xvf amip_geog.tar
+tar -xvf ezget_examples.tar
+tar -xvf ezget1.1.3_hp.tar
+
+You should now have the following files in your directory:
+
+3 fortran libraries:
+
+     libcdms.a
+     libdrs.a
+     libezget.a
+
+
+Documentation:
+
+        README
+        colorgeog.ps
+        ezget.ps
+        ezget.pdf (if you downloaded the pdf tar file)
+        ezget.tex (if you downloaded the tex tar file;  this is
+               the ascii file that latex uses to create ezget.ps)
+
+
+Geography data for AMIP models:
+
+        sftbyrgn_bmr.dat
+        sftbyrgn_bmr.dic
+        sftbyrgn_ccc.dat
+        sftbyrgn_ccc.dic
+        sftbyrgn_cnr.dat
+        sftbyrgn_cnr.dic
+               .
+               .
+               .
+               .
+        sftbyrgn_ukm.dat
+        sftbyrgn_ukm.dic
+        sftbyrgn_yon.dat
+        sftbyrgn_yon.dic
+
+
+Sample programs:
+
+      4738 Mar 22 14:28 areamean.f
+     12443 Mar 22 14:28 extract.f
+      3894 Mar 22 14:28 extract_shrt.f
+      5761 Mar 22 14:27 getregn.f
+      5472 Mar 22 14:28 maxmin.f
+      5499 Mar 22 14:28 meandiff.f
+      6493 Mar 22 14:28 regrding.f
+      8638 Mar 22 14:28 rmscalc.f
+      5820 Mar 22 14:28 smmaxmin.f
+
+
+Input data (DRS format) for sample programs:
+
+   1589760 Feb  2 11:18 nasa-amip_t.dat
+      1536 Feb  2 11:18 nasa-amip_t.dic
+     13312 Feb  6 15:49 sftbyrgn_gla.dat
+      1536 Feb  6 15:49 sftbyrgn_gla.dic
+
+
+If you will be reading netCDF files, you will need to acquire the
+netCDF library from the web site:
+
+ftp://ftp.unidata.ucar.edu/pub/netcdf/
+
+Once you have placed the libraries where you want them, you may have to
+execute "ranlib" on some platforms:
+
+ranlib libcdms
+ranlib libdrs
+ranlib libezget
+ranlib libnetcdf
+
+A surface air temperature data set and a detailed geography mask in DRS
+format are included in the examples file.  All the examples (documented
+in the ezget.ps file) should run on your platform, except rmscalc.f,
+which requires input files from 30 different models.  Before compiling
+and running these sample applications, you will need to edit the files,
+specifying the correct paths to the input data  (check all the calls to
+subroutine defvar).
+
+For various platforms, typical lines for compiling and linking to the
+libraries are given here (you will need to change the path to the
+libraries):
+
+Sun/SunOS:
+f77 extract.f -L$PCMDI/Sunos/lib -lezget -lcdms -ldrs -lnetcdf -o extract
+
+Sun/Solaris 
+f77 extract.f -L$PCMDI/Solaris/lib -lezget -lcdms -ldrs -lnetcdf -o extract
+
+IBM RS6000/AIX
+xlf extract.f  -L$PCMDI/Ibm/lib -lezget -lcdms -ldrs -lnetcdf -o extract
+
+HP/HP-UX
+fort77 +U77 extract.f -L$PCMDI/Hp/lib -lezget -lcdms -ldrs -lm -lnetcdf \
+      -o extract
+
+SGI
+f77 extract.f -L$PCMDI/Sgi/lib -lezget -lcdms -ldrs -lnetcdf -o extract
+
+
+
+*************************************
+
+Bugs, Updates, and Limitations
+
+*************************************
+
+
+*************
+EzGet Bugs
+*************
+
+Bugs in Version 1.0:  A rarely encountered bug was discovered that
+sometimes caused an EzGet internal table (where dimension information
+is stored)  to fill up prematurely.  This bug would be obvious to any
+user who encountered it and was corrected in version 1.1.2.  Another
+bug was found which affects masking of geographical regions.  If a
+geography mask were stored with more than the longitude and latitude
+dimensions explicitly defined (e.g., if the mask were a function of
+time), but if in fact this third dimension contained only one element
+(i.e., "time" might actually only be a dummy dimension and therefore
+the data stored would only be 2-dimensional), and if the field that
+EzGet was instructed to mask was in fact a function of time, then EzGet
+will obtain masking information for most of the field from some
+unpredictable location in the computer's memory and garbage will be
+produced, which may or may not be evident to the user.  This bug was
+corrected in Version 1.1.3.
+
+Bugs in Version 1.1: Several bugs were found having primarily to do
+with masking geographical regions under the newly implemented option to
+use land fraction data (expressed as a percentage).  The worst problem
+found was that land data would be masked when ocean data should have
+been masked and vice versa. Most of these bugs were corrected in
+Version 1.1.2.  Also the second bug found in Version 1.0 remained in
+Version 1.1, but was corrected in Version 1.1.3.
+
+Bugs in Version 1.1.2: Two bugs related to the newly implemented
+option to use land fraction data (expressed as a percentage) were
+discovered.  Also the second bug found in Version 1.0 remained in
+Version 1.1.2.  All of these bug were corrected in Version 1.1.3.
+
+Bugs in Version 1.1.3:  No bugs have been reported in the most recent
+release of EzGet (Version 1.1.3; 19 December 1996).  Users should
+report suspected bugs to taylor13@llnl.gov.  Also all users should
+register by email at taylor13@llnl.gov, indicating name, location, and
+platform, so that they can be immediately informed if significant bugs
+are found.  New releases of EzGet will be announced by email to all
+those registered.
+
+
+*************
+EzGet Updates
+*************
+
+Version 1.0 was the original version of EzGet to be publicly released
+in March 1996.  It had been thoroughly tested at PCMDI over a two year
+period.
+
+Version 1.1 was released in September 1996.  Programs using version 1.0
+should run successfully under version 1.1, but the newer version
+differs in the following respects:
+
+* The capability for selecting (or masking) data from specific
+geographical regions was extended so that output from the Atmospheric
+Model Intercomparison Project 2 (AMIP 2) and Paleoclimate Modeling
+Intercomparison Project (PMIP) could be used in unmodified form.  In
+addition to the types of geographical data that were previously
+permitted, version 1.1 makes it possible for EzGet to read land
+fraction data (expressed as a percent) or sea ice fraction data
+(expressed as a percent), making it easy to mask out  data from land,
+ocean or sea ice regions in analyses of the intercomparison project
+output.  In addition, when data is extracted, for example, from land
+areas only, the weights created by EzGet, which can be used to
+calculate area averages, are properly generated even for models in
+which individual grid cells are partly land and partly ocean.  See
+documentation of subroutines defgeog, getgeog, and defmisc for further
+details.
+
+* The capability of extracting integer data was expanded by allowing
+for proper identification of missing integer data.  See documentation
+of subroutine defmisc for further details.
+
+* A bug in the assignment of aliases for the longitude and latitude
+coordinates (accomplished through calls to subroutine defmisc) was
+corrected.  See documentation of subroutine defmisc for further
+information.
+
+* The assignment of weights for the LMCE and LMD models was corrected
+and generalized to allow for different model resolutions.
+
+* In calls to subroutine defdim, EzGet now recognizes that the model
+acronym 'ech*' (where * can represent any group of characters)
+indicates a gaussian grid. See appendix A of the documentation.
+
+* A bug was found and corrected, so that EzGet now correctly recognizes
+the equivalence of the strings, 'sea ice', 'sea-ice', and 'seaice',
+which are used to select data from regions with sea ice.  If this bug
+was encountered in the previous version, an explicit error message
+would be written so the user would have known about it.
+
+* Documentation was updated to account for all these changes.
+Significant changes were made in the sections on subroutines defgeog,
+demisc, and getgeog.
+
+
+
+Version 1.1.2 was released in 11 November 1996.  It differs from
+Version 1.1 in the following respects:
+
+* A few bugs were corrected, primarily having to do with masking
+geographical regions under the newest option to use land fraction data
+(expressed as a percentage).  The worst bug was that in version 1.1
+land data would be masked when ocean data should have been masked and
+vice versa. Also an option is now available to specify explicitly that
+the geography data set contains land fraction data (expressed as a
+percentage).  See documentation of subroutine defmisc for further
+details.
+
+* A bug involving an internal dimension table created by EzGet was
+corrected, which makes it less likely that this table will become
+filled.
+
+
+
+Version 1.1.3 was released in 9 December 1996.  It differs from
+Version 1.1.2 in the following respects:
+
+The two bugs described at the beginning of this page were eliminated.  </li>
+
+
+**********
+EzGet limitations:
+**********
+
+Current limitations include:
+
+* EzGet has not been ported to the Cray or DEC Alpha computers.
+
+* The full capabilities of EzGet apply only to 4-byte floating point
+(real*4) data. Double precision and integer data, for example, cannot
+be interpolated to new grids within EzGet.
+
+* The names of fields that will be extracted by EzGet should be no
+longer than 16 characters long.  (All standard names for AMIP and PMIP
+are shorter than 16 characters, but EzGet would not be able to extract,
+for example, a field named 'sea_level_pressure' because it is too
+long.)
+
+* Coordinates are converted to single precision when extracted by
+EzGet, and currently it is only possible to specify the domain of data
+to be extracted in single precision.  This may lead to problems if, for
+example, the time  domain of some hourly data you want to extract is
+for years 1000 through 1001 (i.e. hours 8,760,000 through 8,768,760).
+Single precision floating point numbers are unable to resolve 1 part in
+8.7x10**6, so it would not be possible to properly extract this data by
+specifying a domain with subroutine defdim.  (Note, however, subroutine
+defdimi could be used to specify  a domain and retrieve the data
+successfully, but if it were necessary to retrieve the coordinate
+values  getcoord), they would be truncated.
+
+* Geography maps used to specify regions such as "North America",
+"Australia", "South Pacific", etc. are currently available for AMIP 1
+models, but they are not yet available for all PMIP, CMIP, or AMIP 2
+models.
+
+
+***************************
+
+Software Support
+
+***************************
+
+If you have questions contact:
+
+TAYLOR Karl E.		Lawrence Livermore National Laboratory
+			P.O. Box 808, L-264
+			Livermore, CA 94550
+                or (for Federal Express)
+                        L-264
+                        7000 East Ave.
+                        Livermore, CA 94550
+
+		Tel.:	1 (510) 423-3623
+		Fax.:	1 (510) 422-7675
+		email:	taylor13@llnl.gov

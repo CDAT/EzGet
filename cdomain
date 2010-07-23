@@ -1,0 +1,8 @@
+      
+c  ***  cdomain  ***
+               
+      integer ibdry
+      real bdry, cycle
+      character domainc*8, cwt*8, namedim*16
+      common /cdomain/ibdry(2,4), bdry(2,4), cycle(4),  
+     +       domainc(4), cwt(4), namedim(4)

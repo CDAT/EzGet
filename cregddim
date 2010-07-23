@@ -1,0 +1,9 @@
+
+c   ***  cregddim  ***
+
+      integer nlonrgd, nlatrgd            
+      real alonrgd, dlonrgd, alatrgd, dlatrgd
+
+      common /cregddim/ nlonrgd, nlatrgd, alonrgd, dlonrgd,
+     +       alatrgd, dlatrgd
+

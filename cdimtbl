@@ -1,0 +1,17 @@
+
+c   ***  cdimtbl  ***
+
+      integer ifreecoo, icount, idimlen, ioriglen, idimtype,
+     &     iptcoord, iptedge, iptwts
+      real coordvls, begbdy, endbdy, felretr, lelretr, dimcycle
+      character dimnam*16, dimdoman*8, dimwtflg*8, dimtitle*80,
+     &    dimsourc*120, dimunits*40
+
+      common /cdimtbl/ ifreecoo, icount, idimlen(maxdims), 
+     + ioriglen(maxdims), idimtype(maxdims), iptcoord(maxdims),
+     + iptedge(maxdims), iptwts(maxdims), coordvls(lencoord),
+     + begbdy(maxdims), endbdy(maxdims), felretr(maxdims), 
+     + lelretr(maxdims), dimcycle(maxdims),
+     + dimnam(maxdims), dimtitle(maxdims), dimsourc(maxdims), 
+     & dimunits(maxdims), dimdoman(maxdims), dimwtflg(maxdims)
+

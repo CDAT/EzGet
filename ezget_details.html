@@ -1,0 +1,187 @@
+<HTML>
+
+<HEAD><title> EzGet further information</title></head>
+
+
+<BODY>
+<body background="bg9.gif">
+
+<H1>Installing EzGet Software
+</H1>
+<hr>
+
+<P>
+Once you obtain the EzGet software from PCMDI, you can install it as
+described here.
+
+<P>
+You should uncompress the tar files.  For example for the sun Solaris version
+enter:
+
+<p>
+<menu>
+uncompress ezget_examples.tar.Z<br>
+uncompress amip_geog.tar.Z<br>
+uncompress ezget1.2_solaris.tar.Z
+</menu>
+
+<P>
+Then you should extract the files from the tarred library files,
+examples files, geography files, and document files.  For example, for
+the sun Solaris version enter:
+
+<p>
+<menu>
+     tar -xvf ezget1.2_doc.tar <br>
+     tar -xvf ezget_examples.tar <br>
+     tar -xvf amip_geog.tar <br>
+     tar -xvf ezget1.2_solaris.tar
+</menu>
+
+<P>
+You should now have the following files in your directory:
+
+<P>
+<ul>
+<li> Documentation (which you should print out):</li>
+
+<p>
+<menu>
+    README        (an ascii file) <br>
+    ezget.ps      (black & white postscript file; 77 pp) <br>
+    colorgeog.ps  (color postscript file; 1 page) 
+    ezget.pdf     (pdf file, if you downloaded the pdf tar file)
+    ezget.tex     (latex file, if you downloaded the tex tar file)
+    
+</menu>
+<p>
+
+<li> Sample programs:</li>
+
+<p>
+<menu>
+     areamean.f <br>
+     extract.f <br>
+     extract_shrt.f <br>
+     getregn.f <br>
+     maxmin.f <br>
+     meandiff.f <br>
+     regrding.f <br>
+     rmscalc.f <br>
+     smmaxmin.f 
+</menu>
+
+<p>
+<li> Input data (DRS format) for sample programs:</li>
+
+<p>
+<menu>
+    nasa-amip_t.dat <br>
+    nasa-amip_t.dic <br>
+    sftbyrgn_gla.dat <br>
+    sftbyrgn_gla.dic 
+</menu>
+<p>
+
+<p>
+<li> Geography files for AMIP models (sftbyregn in DRS format):</li>
+
+<p>
+<menu>
+    sftbyrgn_bmr.dat <br>
+    sftbyrgn_bmr.dic <br>
+    sftbyrgn_ccc.dat <br>
+    sftbyrgn_ccc.dic <br>
+    sftbyrgn_cnr.dat <br>
+          . <br>
+          . <br>
+          . <br>
+    sftbyrgn_ukm.dat <br>
+    sftbyrgn_ukm.dic <br>
+    sftbyrgn_yon.dat <br>
+    sftbyrgn_yon.dic 
+</menu>
+<p>
+
+<li> 3 fortran libraries:</li>
+
+<p><menu>
+     libcdms.a <br>
+     libdrs.a <br>
+     libezget.a 
+</menu>
+
+</ul>
+
+
+<P>
+If you will be reading netCDF files, you will need to acquire the
+ <a
+href="ftp://ftp.unidata.ucar.edu/pub/netcdf/">netCDF</a> library. 
+
+<P>
+Once you have placed the libraries where you want them, you may have to
+execute "ranlib" on some platforms:
+
+<menu>
+ranlib libcdms <br>
+ranlib libdrs <br>
+ranlib libezget <br>
+ranlib libnetcdf
+</menu>
+
+<P>
+The surface air temperature data set and a detailed geography mask in
+DRS format are included as sample data for use by the sample fortran
+programs in the "examples" tar file.  All the examples (documented in
+the ezget.ps file) should run on your platform, except rmscalc.f, which
+requires input files from 30 different models.  Before compiling and
+running these sample applications, you will need to edit the files,
+specifying the correct paths to the input data  (check all the calls to
+subroutine defvar).
+
+<P>
+For various platforms, typical lines for compiling and linking to the
+libraries are given here (but you will need to change the path to the
+libraries):
+
+<p>
+Sun/SunOS: <br>
+f77 extract.f -L$PCMDI/Sunos/lib -lezget -lcdms -ldrs -lnetcdf -o extract
+
+<p>
+Sun/Solaris: <br>
+f77 extract.f -L$PCMDI/Solaris/lib -lezget -lcdms -ldrs -lnetcdf -o extract
+
+<p>
+IBM RS6000/AIX:<br>
+xlf extract.f  -L$PCMDI/Ibm/lib -lezget -lcdms -ldrs -lnetcdf -o extract
+
+<p>
+HP/HP-UX:<br>
+fort77 +U77 extract.f -L$PCMDI/Hp/lib -lezget -lcdms -ldrs -lm -lnetcdf -o extract
+
+<p>
+SGI:<br>
+f77 extract.f -L$PCMDI/Sgi/lib -lezget -lcdms -ldrs -lnetcdf -o extract
+
+<p>
+<HR>
+<a href="ezget.html">Return to EzGet Overview</A> <br>
+<a href="../index.html">Return to Software Tools</A> <br>
+<a href="../../PCMDI.html">Return to PCMDI home page</A>
+<HR>
+<p>
+Last update December 19, 1996.  For questions or comments on EzGet, contact<BR>
+Karl Taylor (<a href="mailto:taylor13@llnl.gov">taylor13@llnl.gov</a>)
+<p>
+<a href="http://www.llnl.gov/disclaimer.html">LLNL Disclaimers</a>
+<p>
+UCRL-ID-123716
+
+</BODY>
+
+</HTML>
+
+
+

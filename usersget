@@ -1,0 +1,7 @@
+
+c   ***  usersdrs  ***
+
+      integer maxvars, maxdims, lencoord
+      parameter (maxvars=10, maxdims=100, lencoord=50000)
+      
+      
