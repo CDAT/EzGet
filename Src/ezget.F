@@ -350,14 +350,16 @@ c ccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
 
 c      common variables
 
+c      implicit none
 #include "drsdef.h"
 #include "fcddrs.h"
 
-      implicit none
+
 #include "ciotbl"
 #include "cscalars"
 
-      integer ierr, i, cw_cllun
+      integer ierr, i
+c, cw_cllun
       
       do 100 i = 1,maxiodev
          if (iofiluse(i) .ge. 0) ierr = cw_cllun(90+i)
@@ -3270,8 +3272,8 @@ c ?/?  check that following works with regrdagain in compall
            j2 = nint((endbloc(1)-alonrgd)/abs(dlonrgd))
            idlen(1) = iabs(j2-j1) + 1
          endif
-c         ibegbloc(1) = 0
-c         iendbloc(1) = 0
+         ibegbloc(1) = 0
+         iendbloc(1) = 0
 
 c  fuzzy = abs(dlonrgd)*0.0001
 
@@ -3303,8 +3305,8 @@ c ?/?  check that following works with regrdagain in compall
            j2 = nint((endbloc(2)-alatrgd)/abs(dlatrgd))
            idlen(2) = iabs(j2-j1) + 1
          endif
-c         ibegbloc(2) = 0
-c         iendbloc(2) = 0
+         ibegbloc(2) = 0
+         iendbloc(2) = 0
 
 c         fuzzy = abs(dlatrgd)*0.0001
 
@@ -4582,7 +4584,7 @@ c      common variables
 #include "drsdef.h"
 #include "fcddrs.h"
 
-      implicit none
+c      implicit none
 #include "usersget"
 #include "cscalars"
 #include "cregddim"
@@ -4595,8 +4597,8 @@ c      common variables
       double precision pi, tedge(*), twt(*)
       real vecdim(*)
 
-
-      integer ierr, genwts, cw_getcdim, jj, nc, jbeg, jend,
+c intger cw_getcdim
+      integer ierr, genwts, jj, nc, jbeg, jend,
      +       ncb, nce, j, n, lbegbdy, lendbdy, j1, j2, ij, i, je,
      &       itemp
       real fuzzy, begb, endb, vect, dx, yrlen
@@ -5380,7 +5382,7 @@ c      common variables
 #include "drsdef.h"
 #include "fcddrs.h"
 
-      implicit none
+c      implicit none
 #include "usersget"
 #include "cscalars"
 #include "cvartbl"
@@ -5403,16 +5405,17 @@ c      local variables:
       integer ierr, ndim, i, jj, idicun, idtype(4), irow, lvarlen,
      +         iorders(4), lendim(4), idlen(4), icnt, jcnt, ll, j, 
      &         nm, idrs, ierr1, ierr2, ierr3, istore, k, isize
-      integer cw_cluvdb,cw_setname,cw_getedim,cw_getslab,
-     +     cw_getcdim,opendrs, getdimen, mkdimtbl,
-     +     cw_setdim, cw_getdat, univunit, miallocw, mifree
+c      integer cw_cluvdb,cw_setname,cw_getedim,cw_getslab,cw_getcdim,cw_setdim, cw_getdat
+      integer
+     +     opendrs, getdimen, mkdimtbl,
+     +     univunit, miallocw, mifree
 
       real fes, les, felrloc(4), lelrloc(4), delta(4), cycleloc(4)
       pointer (ptv, vecdim), (ptw, twt), (pte, tedge)
       real vecdim(*)
       double precision tedge(*), twt(*)
 
-      logical cw_drstest
+c      logical cw_drstest
 
       getfld = 0
       
@@ -6825,14 +6828,14 @@ c ccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
 #include "drsdef.h"
 #include "fcddrs.h"
 
-      implicit none
+c      implicit none
 #include "usersget"
 #include "cscalars"
 #include "cvartbl"
 #include "cdimtbl"
 #include "ciotbl"
 #include "cdomain"
-      integer cw_cllun, cw_seterr
+c      integer cw_cllun, cw_seterr
       integer ierr, i, ii, j
 
 c    intialize error controls
@@ -7474,7 +7477,7 @@ c ccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
 
 c      common variables
 
-      implicit none
+c      implicit none
 #include "usersget"
 #include "ciotbl"
 #include "cvartbl"
@@ -7485,9 +7488,10 @@ c     local variables
 
       integer idicun, idatun, iuse, lastuse, nextunit, ierr, ivar,
      &     ierrcntl, i, icount
-      integer cw_inqdict, cw_aslun, cw_setname, cw_seterr,
-     +      cw_cluvdb, cw_cllun, cw_getname
-      logical cw_drstest, caseindp
+c      integer cw_inqdict, cw_aslun, cw_setname, cw_seterr,
+c     +      cw_cluvdb, cw_cllun, cw_getname
+c      logical cw_drstest, caseindp
+      logical  caseindp
 
       opendrs = 0
 c
@@ -8250,7 +8254,7 @@ c      common variables
 #include "drsdef.h"
 #include "fcddrs.h"
 
-      implicit none
+c      implicit none
 #include "usersget"
 #include "cscalars"
 #include "cvartbl"
@@ -8260,7 +8264,8 @@ c      common variables
       integer ivar, ishowd
       real gmask(*)
 
-      integer univunit, cw_getedim, getfld, cw_cluvdb, opendrs,
+c      integer univunit, cw_getedim, getfld, cw_cluvdb, opendrs,
+      integer univunit, getfld, opendrs,
      +       xregion
       logical caseindp
       
