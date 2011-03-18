@@ -1,9 +1,11 @@
-# DRS library Makefile
+# EZGet Makefile
 #
 # Usage:
 #
-# To make DRS library (libdrs.a) for Linux, with Absoft FORTRAN:
-#	% make
+# Change DEBUG as needed.
+# Check the paths specified here for whether they are right for you.
+# Provide a path to fcddrs.h, or copy it (it's in cdat/libcdms/include)
+# make
 #
 #--------------------------------------------------------------------
 LIBNAME = ezget
