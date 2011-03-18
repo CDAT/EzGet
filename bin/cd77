@@ -19,10 +19,14 @@ Note: Any combination of the options can be specified,
 Examples:
   cd77 -ezget -o ezsample ezsample.F
   cd77 -lats -verbose -o lats_sample lats_sample.f
+
+To compile for debugging on a Macinstosh
+  cd77 -ezget -o ezsample ezsample.F -g -save-temps
+  dsymutil ezsample
 """
 
 
-import sys, os, string
+import sys, os, string, platform
 
 nclib = os.popen("nc-config --libs").readlines()
 if len(nclib)>0:
@@ -60,14 +64,13 @@ cdmslib = {"irix6" : "-L/usr/local/lib -lcdms -lnetcdf -L/usr/local/HDF4.0r2/lib
 
 f77exec = {"irix6" : "f77",
            "sunos5" : "f77",
-           "darwin10" : "gfortran",
+           "darwin10" : "gfortran -arch x86_64",
            "linux2" : "pgf77"}
 
 # Get the host type and major operating system version
 def getplatform():
-    uname = string.split(os.popen("uname -a",'r').readlines()[0])
-    ostype = uname[0]
-    osmajor = string.split(uname[2],".")[0]
+    ostype = platform.system()
+    osmajor = string.split(platform.release(),".")[0]
     return string.lower(ostype+osmajor)
 
 def main(argv):
