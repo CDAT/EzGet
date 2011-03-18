@@ -9,13 +9,15 @@
 LIBNAME = ezget
 CDMSLIB = /usr/local/lib
 CDMSINC = /usr/local/include
-DEBUG = -O 
+# DEBUG = -O 
+DEBUG = -g -save-temps -O0
 # Requires Absoft FORTRAN
-FC = gfortran
+FC = /usr/local/bin/gfortran
 CC = gcc
-ARCHOPT = -arch i386
-ARCHOPT = 
-FOPTS = -fcray-pointer $(ARCHOPT) -W
+ARCHOPT = -arch x86_64
+#ARCHOPT = -arch i386
+# FOPTS = -fcray-pointer $(ARCHOPT) -W
+FOPTS = -fcray-pointer $(ARCHOPT) -I ../../libdrs/lib -I ../include
 FFLAGS = $(DEBUG) $(FOPTS)
 INSTALL_LIB = /usr/local/lib
 INSTALL_INC = /usr/local/include
@@ -24,7 +26,7 @@ CPP = cpp
 
 FOBJECTS = Src/${LIBNAME}.o
 FINCLUDES = drsdef.h drscom.h cycle.h
-FINCLUDES = 
+# FINCLUDES = 
 FSOURCES = $(FOBJECTS:.o=.F)
 
 COBJECTS = 
@@ -68,4 +70,4 @@ clean:
 .SUFFIXES: .F .o
 
 .F.o:
-	cd Src ; $(FC) -I../include $(FFLAGS) -c ../$<
+	cd Src ; $(FC) $(FFLAGS) -c ../$<
