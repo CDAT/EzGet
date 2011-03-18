@@ -1,4 +1,7 @@
 c f77 -e areamean.f -L$PCMDI/lib -lezget -lcdms -ldrs -L/usr/local/netcdf-2.3.2/libsrc -lnetcdf -o areamean
+c
+c Macintosh OS X
+c gfortran -g -save-temps -e areamean.f -arch x86_64 -L$HOME/drs/ezget -L$HOME/cdat/libcdms/lib -L$HOME/drs/libdrs/lib -lezget -lcdms -ldrs -lnetcdf -o areamean
 c f77 -e -g areamean.f -L/zooks0/ktaylor/pcmdi/util/ezget -lezgetdebug -L$PCMDI/lib -lcdms -ldrs -L/usr/local/netcdf-2.3.2/libsrc -lnetcdf -o areamean
 c  IBM
 c xlf areamean.f  -L/u/williams/ezget -lezget -L/u/williams/devel/cdms/lib -lcdms -L/u/williams/drs/lib -ldrs -L/u/williams/netcdf/libsrc -lnetcdf -o areamean
