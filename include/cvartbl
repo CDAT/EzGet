@@ -7,14 +7,16 @@ c   ***  cvartbl  ***
       character varnam*64, filnam*120, vartitle*80, varunits*40,
      +       vardate*8, vartime*8, varsourc*120, vartype*8, 
      +       vdimname*16, vdimdom*8, vdimwt*8
-      common /cvartbl/ ivarndim(maxvars), iptdim(4,maxvars),
+      common /cvartbli/ ivarndim(maxvars), iptdim(4,maxvars),
      +       ivarlen(maxvars), igeogin(maxvars), igeogout(maxvars), 
      +       ishowin(maxvars), ishowout(maxvars), iregrid(maxvars), 
      +       iptdimrg(4,maxvars), ivdimpln(2,4,maxvars), 
-     +       nlatrgdv(maxvars), nlonrgdv(maxvars), dlatrgdv(maxvars), 
+     +       nlatrgdv(maxvars), nlonrgdv(maxvars)
+      common /cvartblr/ dlatrgdv(maxvars), 
      +       alatrgdv(maxvars), dlonrgdv(maxvars), alonrgdv(maxvars),
      +       vdimbdry(2,4,maxvars),  
-     +       vdimcycl(4,maxvars), varnam(maxvars), filnam(maxvars),
+     +       vdimcycl(4,maxvars)
+      common /cvartbls/ varnam(maxvars), filnam(maxvars),
      +       vartitle(maxvars), varunits(maxvars), vardate(maxvars),
      +       vartime(maxvars), varsourc(maxvars), vartype(maxvars),
      +       vdimname(4,maxvars), vdimdom(4,maxvars), vdimwt(4,maxvars)
