@@ -350,7 +350,7 @@ c ccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
 
 c      common variables
 
-c      implicit none
+      implicit none
 #include "drsdef.h"
 #include "fcddrs.h"
 
@@ -358,8 +358,7 @@ c      implicit none
 #include "ciotbl"
 #include "cscalars"
 
-      integer ierr, i
-c, fcw_cllun
+      integer ierr, i, fcw_cllun
       
       do 100 i = 1,maxiodev
          if (iofiluse(i) .ge. 0) ierr = fcw_cllun(90+i)
@@ -4581,10 +4580,10 @@ c ccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
 
 c      common variables
           
+      implicit none
 #include "drsdef.h"
 #include "fcddrs.h"
 
-c      implicit none
 #include "usersget"
 #include "cscalars"
 #include "cregddim"
@@ -5379,10 +5378,10 @@ c ccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
 
 c      common variables
 
+      implicit none
 #include "drsdef.h"
 #include "fcddrs.h"
 
-c      implicit none
 #include "usersget"
 #include "cscalars"
 #include "cvartbl"
@@ -5405,8 +5404,8 @@ c      local variables:
       integer ierr, ndim, i, jj, idicun, idtype(4), irow, lvarlen,
      +         iorders(4), lendim(4), idlen(4), icnt, jcnt, ll, j, 
      &         nm, idrs, ierr1, ierr2, ierr3, istore, k, isize
-c      integer fcw_cluvdb,cw_setname,cw_getedim,cw_getslab,cw_getcdim,cw_setdim, cw_getdat
-      integer fcw_setname, fcw_getedim, fcw_getcdim, fcw_setdim, fcw_getdat
+      integer fcw_cluvdb, cw_getslab, fcw_getdat
+      integer fcw_setname, fcw_getedim, fcw_getcdim, fcw_setdim
       integer
      +     opendrs, getdimen, mkdimtbl,
      +     univunit, miallocw, mifree
@@ -5428,6 +5427,12 @@ c      integer fcw_cluvdb,cw_setname,cw_getedim,cw_getslab,cw_getcdim,cw_setdim,
         lelrloc(i) = 0.0
         cycleloc(i) = 0.0
         delta(i) = 0.0
+c       These strings should have values when passed into other routines.
+c       Note that Fortran pads with blanks.
+        dname(i) = " "
+        dsource(i) = " "
+        dtitle(i) = " "
+        dunits(i) = " "
    10 continue
       
 c      check that variable and file have been defined
@@ -6826,17 +6831,17 @@ c ccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
 
       subroutine initget()
           
+      implicit none
 #include "drsdef.h"
 #include "fcddrs.h"
 
-c      implicit none
 #include "usersget"
 #include "cscalars"
 #include "cvartbl"
 #include "cdimtbl"
 #include "ciotbl"
 #include "cdomain"
-c      integer fcw_cllun, cw_seterr
+      integer fcw_cllun, cw_seterr
       integer ierr, i, ii, j
 
 c    intialize error controls
@@ -7473,12 +7478,12 @@ c ccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
       integer function opendrs(ivar, ierrcntl, idicun)
 
 
+      implicit none
 #include "drsdef.h"
 #include "fcddrs.h"
 
 c      common variables
 
-c      implicit none
 #include "usersget"
 #include "ciotbl"
 #include "cvartbl"
@@ -7486,14 +7491,12 @@ c      implicit none
 c     local variables
 
       character dumnam*16, vtitle*80, vsourc*120, vunits*40, vtype*8
+      data dumnam /"                "/
 
       integer idicun, idatun, iuse, lastuse, nextunit, ierr, ivar,
      &     ierrcntl, i, icount
-c      integer fcw_inqdict, cw_aslun, cw_setname, cw_seterr,
-c     +      fcw_cluvdb, fcw_cllun, cw_getname
-c      logical caseindp
-      integer fcw_drstest, fcw_aslun, fcw_setname
-      integer fcw_getname
+      integer fcw_inqdict, fcw_aslun, fcw_setname, cw_seterr,
+     +      fcw_cluvdb, fcw_cllun, fcw_getname, fcw_drstest
       logical  caseindp
 
       opendrs = 0
@@ -8256,10 +8259,10 @@ c ccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
 
 c      common variables
 
+      implicit none
 #include "drsdef.h"
 #include "fcddrs.h"
 
-c      implicit none
 #include "usersget"
 #include "cscalars"
 #include "cvartbl"
@@ -8269,9 +8272,8 @@ c      implicit none
       integer ivar, ishowd
       real gmask(*)
 
-c      integer univunit, cw_getedim, getfld, fcw_cluvdb, opendrs,
-      integer univunit, getfld, opendrs, fcw_getedim
-     +       xregion
+      integer fcw_getedim, fcw_cluvdb, opendrs
+      integer univunit, getfld, xregion
       logical caseindp
       
       integer i, iii, ii, i1, i2, j, jj, idlen(4), idtype, igeog, nvdim,
