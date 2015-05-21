@@ -1,0 +1,95 @@
+#!/bin/bash
+#-------------------------------------------------------------------------------
+# Date:    02-FEB-2011.
+# Author:  B.D. Santer, LLNL, Livermore.
+# Purpose: Batch file for running:
+#
+#          SPATIAL_AVERAGE_EX20C3M_EQMSU_METHOD1a_ALLMODELS1.F
+#
+#          (calculates spatial averages of input synthetic MSU temperature data 
+#          in IPCC sresa1b scenario runs).
+#-------------------------------------------------------------------------------
+#
+#-------------------------------------------------------------------------------
+# Move to temporary directory.
+#-------------------------------------------------------------------------------
+#
+cd $HOME/Tmpdir1
+#
+#-------------------------------------------------------------------------------
+# Copy program to temporary directory.
+#-------------------------------------------------------------------------------
+#
+# unalias ls 
+unalias cp
+# cp /home/santer1/Amplify/Fort/Spatial_Averages/ex20c3m/Method1a/spatial_average_ex20c3m_eqmsu_method1a_ALLMODELS1.F program.F
+cp -f $HOME/drs/ezget/Test/spatial_average_ex20c3m_eqmsu_method1a_ALLMODELS1.F program.F
+#
+export pv1=tlt  
+export creg1=TLO2
+export ctype=AVE
+export iyr1=1979
+export iyr2=2010
+#-------------------------------------------------------------------------------
+# Read standard input file with user-selected options.
+#-------------------------------------------------------------------------------
+cat > BOIL << EOF1
+$creg1             ! CREG1    Study region
+$pv1               ! PV1      Variable name              
+$iyr1              ! IYR1     First year of reference period
+$iyr2              ! IYR2     Last year of reference period
+1979, 2010         ! IYR3/4   First, last years of analysis period
+$ctype             ! CTYPE    AVE / AOT=ave over THRESH1 / COV = area over THRESH1
+1                  ! ITAIL    1=one-tailed test / 2=two-tailed test           
+1                  ! IRES     0=AR1 from raw data / 1=AR1 from residuals
+0.5                ! SAVCRIT  Coverage threshold for calculating spatial mean
+EOF1
+#
+#-------------------------------------------------------------------------------
+# Compile program and link with required libraries.
+# (Use -r8 option for double precision compilation).
+#-------------------------------------------------------------------------------
+#
+${HOME}/bin/cd77 -verbose -ezget -cdms \
+    -o doit$ -g program.F \
+    -L$HOME/src/santer/Stat -lstat_s_mac \
+    -L$HOME/src/santer/Spec -lspec_s_mac \
+    -L$HOME/src/santer/All -lall_s_mac \
+    -O
+#    -g -O0 -save-temps
+# #   -R/usr/local/imsl/lib/lib.solaris \
+# #   -L/usr/local/imsl/lib/lib.solaris -limsl -lsocket -limsl \
+#     -L/home/santer1/Libs/Spec -lspec_s_linux \
+#     -L/home/santer1/Libs/Stat -lstat_s_linux \
+#     -L/home/santer1/Libs/Spec -lspec_s_linux \
+#     -L/home/santer1/Libs/All -lall_s_linux 
+echo ' Program compiled! '                 
+#
+#-------------------------------------------------------------------------------
+# Set execute mode for executable version of program.
+#-------------------------------------------------------------------------------
+#
+chmod +x doit$
+ls -l
+#
+#-------------------------------------------------------------------------------
+# Execute program.
+#-------------------------------------------------------------------------------
+#
+doit$
+echo ' Successful completion of program! '
+#
+#-------------------------------------------------------------------------------
+# Copy output files to target destination.
+#-------------------------------------------------------------------------------
+#
+# ls -l
+# #cp -i *.d /home/santer1/Amplify/Out/$creg1/$pv1/$ctype/$iyr1-$iyr2/Nofilt/All_Models/Trend$itrend
+# cp -i *.d /home/santer1/Amplify/Out/$creg1/$pv1/$iyr1-$iyr2/Nofilt/All_Models/Trend0/Method1a
+#
+#-------------------------------------------------------------------------------
+# Delete files after completion of program.
+#-------------------------------------------------------------------------------
+#
+# rm -f *
+# exit

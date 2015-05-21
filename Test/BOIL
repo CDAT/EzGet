@@ -1,0 +1,9 @@
+             ! CREG1    Study region
+               ! PV1      Variable name              
+              ! IYR1     First year of reference period
+              ! IYR2     Last year of reference period
+1979, 2010         ! IYR3/4   First, last years of analysis period
+             ! CTYPE    AVE / AOT=ave over THRESH1 / COV = area over THRESH1
+1                  ! ITAIL    1=one-tailed test / 2=two-tailed test           
+1                  ! IRES     0=AR1 from raw data / 1=AR1 from residuals
+0.5                ! SAVCRIT  Coverage threshold for calculating spatial mean

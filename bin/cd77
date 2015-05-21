@@ -51,7 +51,7 @@ cdmslib = {"irix6" : "-L/usr/local/lib -lcdms -lnetcdf -L/usr/local/HDF4.0r2/lib
            "sunos5" : "-L/usr/local/lib -lcdms -lmfhdf -ldf -ljpeg -lz -lnetcdf -lnsl -ldrs -lm -lsunmath",
            # "linux2" : "-L/usr/local/lib -lcdms -lnetcdf -lmfhdf -ldf -ljpeg -lz -lmfhdf -ldf -ljpeg -lz -ldrs -lm"
            "darwin10" : "-L/usr/local/lib -lcdms -lnetcdf -ldrs -lm",
-           "linux2" : "-L/usr/local/lib -lcdms -lnetcdf -ldrs -lm",
+           "linux2" : "-L/usr/local/cdat/experimental/Externals/lib -lnetcdf -L/usr/local/lib -lcdms -ldrs -lm",
            }
 
 ## latsinc = {"irix6" : "-I/usr/local/include",

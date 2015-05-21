@@ -358,10 +358,10 @@ c      common variables
 #include "ciotbl"
 #include "cscalars"
 
-      integer ierr, i, fcw_cllun
+      integer ierr, i, cllun
       
       do 100 i = 1,maxiodev
-         if (iofiluse(i) .ge. 0) ierr = fcw_cllun(90+i)
+         if (iofiluse(i) .ge. 0) ierr = cllun(90+i)
          iofilnam(i) = 'not defined'
          iofiluse(i) = i - 1 - maxiodev
   100 continue
@@ -2694,7 +2694,8 @@ c ccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
       character dname*16, dsource*120, dtitle*80, dunits*40
       integer idtype, idlen, ndim, ierr, idicun
       real abeg, aend
-      integer fcw_cluvdb, fcw_getedim, opendrs
+cjfp was      integer cluvdb, getedim, opendrs
+      integer fcw_cluvdb, getedim, opendrs
       logical caseindp
 
 
@@ -2757,6 +2758,7 @@ c       check that variable and file have been defined
          return
         endif
 
+cjfp was       ierr = cluvdb()
         ierr = fcw_cluvdb()
         if (ierr .ne. 0) then
           call errcheck('DRS function cluvdb', 'subroutine diminfo',1)
@@ -2773,7 +2775,7 @@ c         get info on each dimension
         ndim = ivarndim(ivar)
 
         do  100 i=1,ndim
-          ierr = fcw_getedim(ivar,dsource,dname,dtitle,dunits,
+          ierr = getedim(ivar,dsource,dname,dtitle,dunits,
      $        idtype, idlen, abeg, aend)
           if (ierr .ne. 0) then
             call errcheck('DRS function getedim','subroutine diminfo',1)
@@ -2935,7 +2937,8 @@ c ccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
       character*(*) dnames(*)
       integer ivar, idtype, idlen, i, ndim, ierr, idicun
       real beg(*), end(*)
-      integer fcw_cluvdb, fcw_getedim, opendrs
+cjfp was      integer cluvdb, getedim, opendrs
+      integer fcw_cluvdb, getedim, opendrs
       logical caseindp
 
        
@@ -2965,7 +2968,7 @@ c         get info on each dimension
       ndim = ivarndim(ivar)
 
       do  100 i=1,ndim
-        ierr = fcw_getedim(i,dsource,dnames(i),dtitle,dunits,
+        ierr = getedim(i,dsource,dnames(i),dtitle,dunits,
      $        idtype, idlen, beg(i), end(i))
         if (ierr .ne. 0) then
           call errcheck('DRS function getedim','subroutine domain',1)
@@ -4596,6 +4599,7 @@ c      common variables
       double precision pi, tedge(*), twt(*)
       real vecdim(*)
 
+cjfp was      integer getcdim
       integer fcw_getcdim
       integer ierr, genwts, jj, nc, jbeg, jend,
      +       ncb, nce, j, n, lbegbdy, lendbdy, j1, j2, ij, i, je,
@@ -4615,7 +4619,8 @@ c      common variables
      +                     idtype, lendim, vecdim, jj)
          if (ierr .ne. 0) then
             getdimen = 1
-            call errcheck('DRS function getcdim','function getdimen',1)
+            call errcheck('DRS function fcw_getcdim',
+     1           'function getdimen',1)
             return
          endif
 
@@ -5404,8 +5409,11 @@ c      local variables:
       integer ierr, ndim, i, jj, idicun, idtype(4), irow, lvarlen,
      +         iorders(4), lendim(4), idlen(4), icnt, jcnt, ll, j, 
      &         nm, idrs, ierr1, ierr2, ierr3, istore, k, isize
-      integer fcw_cluvdb, cw_getslab, fcw_getdat
+cjfp was      integer cluvdb, fcw_getslab, getdat
+      integer fcw_cluvdb, fcw_getslab, fcw_getdat
+cjfp was     integer setname, getedim, getcdim, setdim
       integer fcw_setname, fcw_getedim, fcw_getcdim, fcw_setdim
+      integer fcw_error
       integer
      +     opendrs, getdimen, mkdimtbl,
      +     univunit, miallocw, mifree
@@ -5415,7 +5423,7 @@ c      local variables:
       real vecdim(*)
       double precision tedge(*), twt(*)
 
-      integer fcw_drstest
+      integer drstest
 
       getfld = 0
       
@@ -5448,7 +5456,7 @@ c      check that variable and file have been defined
       ierr = fcw_cluvdb()
       if (ierr .ne. 0) then
          getfld = ierr
-         call errcheck('DRS function cluvdb', 'function getfld',1)
+         call errcheck('DRS function fcw_cluvdb', 'function getfld',1)
          return
       endif
 
@@ -5466,7 +5474,8 @@ c         get info on each dimension
      $        idtype(i) , idlen(i), fes, les)
          if (ierr .ne. 0) then
             getfld = ierr
-            call errcheck('DRS function getedim','function getfld',1)
+            call errcheck('DRS function fcw_getedim',
+     1           'function getfld',1)
             return
          endif
 
@@ -5780,7 +5789,7 @@ c          remove dimensions that were missing
       ierr = fcw_cluvdb()
       if (ierr .ne. 0) then
          getfld = 1
-         call errcheck('DRS function cluvdb', 'function getfld',1)
+         call errcheck('DRS function fcw_cluvdb', 'function getfld',1)
          return
       endif
          
@@ -5792,8 +5801,8 @@ c          remove dimensions that were missing
          return
       endif
 
-      if (wrap) then  
-        if (fcw_drstest( cw_getslab(idicun, ndim, iorders, felrloc,
+      if (wrap) then
+        if (drstest( fcw_getslab(idicun, ndim, iorders, felrloc,
      +       lelrloc, cycleloc, array, lendim) ) .ne. 0 ) then
           print *,'DRS error reading data for ', filnam(ivar),
      +            varnam(ivar) 
@@ -5815,11 +5824,11 @@ c          print*, lelrloc(j)
             print*, 'preparing to read data from ', filnam(ivar),
      +                varnam(ivar) 
             getfld = 1
-            call errcheck('DRS function setdim','function getfld',1)
+            call errcheck('DRS function fcw_setdim','function getfld',1)
             return
           endif
- 1200   continue 
-        if (vartype(ivar) .eq. 'R*8') then
+ 1200   continue
+        If (vartype(ivar) .eq. 'R*8') then
 c           IDRS_BYTESPERWORD is a parameter in drsdef.h which is
 c              4 on Suns and 8 on Crays.
 c   ????
@@ -5833,13 +5842,13 @@ c ???   check if isize is correct argument
            print *, 'DRS error reading data from ', filnam(ivar),
      +              varnam(ivar) 
           getfld = 1
-          call errcheck('DRS function getdat','function getfld',1)
+          call errcheck('DRS function fcw_getdat','function getfld',1)
           return
         endif
       endif
 
 c Get the dimension vectors for the data AS RETRIEVED. Note that this
-c must be done after the call to getslab and before any calls to cluvdb.
+c must be done after the call to getslab and before any calls to fcw_cluvdb.
 c Also put info. into vartable and dimtable
 
 
@@ -5899,7 +5908,8 @@ c Also put info. into vartable and dimtable
          endif
          if (ierr .ne. 0) then
             getfld = 1
-            call errcheck('DRS function getcdim','function getfld',1)
+            call errcheck('DRS function fcw_getcdim',
+     1           'function getfld',1)
             return
          endif
 
@@ -6321,7 +6331,7 @@ c      local variables:
      &    ii, lendatal, ilono, ilato, ierr1, ierr2, len
       integer  xgeog, applywts, getfld, doregrid, univunit, miallocw,
      &    mifree
-      real adum, a1
+      real adum(1), a1
       logical caseindp
 
       if (caseindp(vdimname(1,ivar),  'not def')) then
@@ -6841,7 +6851,7 @@ c ccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
 #include "cdimtbl"
 #include "ciotbl"
 #include "cdomain"
-      integer fcw_cllun, cw_seterr
+      integer cllun, seterr
       integer ierr, i, ii, j
 
 c    intialize error controls
@@ -6868,14 +6878,14 @@ c    initialize various variables
       ifreecoo = 1
       icount = 0
       coordvls(lencoord) = 1.
-      ierr = cw_seterr(6,IDRS_NOREPORT)
+      ierr = seterr(6,IDRS_NOREPORT)
       do 100 i = 1,maxiodev
         ii = 90 + i
-        ierr = fcw_cllun(ii)
+        ierr = cllun(ii)
         iofilnam(i) = 'not defined'
         iofiluse(i) = i - 1 - maxiodev
  100  continue
-      ierr = cw_seterr(6,IDRS_FATAL)
+      ierr = seterr(6,IDRS_FATAL)
 
       do 200 i = 1, maxvars
          varnam(i) = 'not defined'
@@ -7495,8 +7505,11 @@ c     local variables
 
       integer idicun, idatun, iuse, lastuse, nextunit, ierr, ivar,
      &     ierrcntl, i, icount
-      integer fcw_inqdict, fcw_aslun, fcw_setname, cw_seterr,
-     +      fcw_cluvdb, fcw_cllun, fcw_getname, fcw_drstest
+cjfp was      integer inqdict, aslun, setname, seterr,
+cjfp was     +      cluvdb, cllun, getname, drstest
+      integer fcw_inqdict, fcw_aslun, fcw_setname, fcw_seterr
+      integer fcw_cluvdb, fcw_cllun, fcw_getname
+      logical fcw_drstest
       logical  caseindp
 
       opendrs = 0
@@ -7559,13 +7572,11 @@ c      check whether user remembered to define file path
 
          icount = 0
 c        Open the input DRS file. Exit if an error occurs.
-c         print *, "jfp will open file", filnam(ivar)
-c   60    if (cw_drstest(cw_aslun(idicun, filnam(ivar), idatun, ' ',        
-   60    continue
+c   60    if (cw_drstest(cw_aslun(idicun, filnam(ivar), idatun, ' ',
+c     +        IDRS_READ)) .ne. 0 ) then
+ 60      continue
          ierr=fcw_aslun(idicun, filnam(ivar), idatun, ' ',IDRS_READ)
-         if (fcw_drstest(ierr) .ne. 0 ) then
-c            print *, "jfp fcw_aslun ierr=", ierr, "  fcw_drstest(ierr)=",
-c     +           fcw_drstest(ierr)
+         if (fcw_drstest(ierr)) then
             icount = icount + 1
             if (icount .lt. 3) go to 60
             opendrs = -1000
@@ -7578,7 +7589,6 @@ c     +           fcw_drstest(ierr)
          endif
 
       endif
-
 
 c     Determine whether the variable is in the file. If not, return.
 c           else put info. in vartable
@@ -7606,16 +7616,17 @@ c           else put info. in vartable
       ierr = fcw_cluvdb()
       if (ierr .ne. 0) then
          opendrs = 1
-         call errcheck('DRS function cluvdb', 'function opendrs',1)
+         call errcheck('DRS function fcw_cluvdb', 'function opendrs',1)
          return
       endif
       ierr = fcw_setname(vsourc,varnam(ivar),vtitle,vunits,vtype)
       if (ierr .ne. 0) then
          opendrs = 1
-         call errcheck('DRS function setname', 'function opendrs',1)
+         call errcheck('DRS function fcw_setname', 'function opendrs',1)
          return
       endif
-      ierr = cw_seterr(6,IDRS_FATAL)
+      ierr = fcw_seterr(6,IDRS_FATAL)
+cjfp was      ierr = inqdict(idicun,IDRS_GETFIRSTVAR)
       ierr = fcw_inqdict(idicun,IDRS_GETFIRSTVAR)
 
       if(ierr.ne.IDRS_SUCCESS) then
@@ -7633,7 +7644,7 @@ c           else put info. in vartable
          endif
          return
       endif
-      ierr = cw_seterr(6,IDRS_WARNING)
+      ierr = fcw_seterr(6,IDRS_WARNING)
 
 c         retrieve number of dimensions (and other info)
       ierr = fcw_getname(
@@ -7642,7 +7653,7 @@ c         retrieve number of dimensions (and other info)
      +     vartype(ivar), ivarndim(ivar))
       if (ierr .ne. 0) then
          opendrs = 1
-         call errcheck('DRS function getname', 'function opendrs',1)
+         call errcheck('DRS function fcw_getname', 'function opendrs',1)
          return
       endif
 
@@ -8272,7 +8283,8 @@ c      common variables
       integer ivar, ishowd
       real gmask(*)
 
-      integer fcw_getedim, fcw_cluvdb, opendrs
+cjfp was      integer getedim, cluvdb, opendrs
+      integer getedim, fcw_cluvdb, opendrs
       integer univunit, getfld, xregion
       logical caseindp
       
@@ -8295,6 +8307,7 @@ c    how many dimensions?
       
       if (ishowd .eq. all) return
          
+cjfp was      ierr = cluvdb()
       ierr = fcw_cluvdb()
       if (ierr .ne. 0) then
           xgeog = 1
@@ -8322,7 +8335,7 @@ c    how many dimensions?
       iglon = 0
 
       do 400 i=1,ngdim
-         ierr = fcw_getedim(i,dsource,dname(i),dtitle,dunits,
+         ierr = getedim(i,dsource,dname(i),dtitle,dunits,
      +         idtype, idlen(i), fes, les)
          if (ierr .ne. 0) then
             xgeog = 1

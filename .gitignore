@@ -1,0 +1,54 @@
+# adapted from https://gist.github.com/octocat/9257657
+
+# EzGet-specific exclusions, executables and other binaries
+##########################################################
+areamean
+areamean.dSYM
+stubs
+
+# Compiled source #
+###################
+*.com
+*.class
+*.dll
+*.exe
+*.s
+*.o
+*.so
+*.a
+*.pyc
+a.out
+ 
+# Packages #
+############
+# it's better to unpack these files and commit the raw source
+# git has its own built in compression methods
+*.7z
+*.dmg
+*.gz
+*.iso
+*.jar
+*.rar
+*.tar
+*.zip
+ 
+# Logs databases, backups, debugging #
+######################################
+*.log
+*.sql
+*.sqlite
+*.bup
+*_bup
+*~
+*.trace
+ 
+# OS generated files #
+######################
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+Resources 

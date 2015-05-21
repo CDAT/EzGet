@@ -9,15 +9,18 @@
 #
 #--------------------------------------------------------------------
 LIBNAME = ezget
-CDMSLIB = /usr/local/lib
-CDMSINC = /usr/local/include
-# DEBUG = -O 
-DEBUG = -g -save-temps -O0
+#jfp was CDMSLIB = /usr/local/lib
+#jfp was CDMSINC = /usr/local/include
+CDMSLIB = ${UVCDAT_SETUP_PATH}/Externals/lib
+CDMSINC = ${UVCDAT_SETUP_PATH}/Externals/include
+DEBUG = -O 
+# DEBUG = -g -save-temps -O0
 # Requires Absoft FORTRAN
 FC = /usr/local/bin/gfortran
 CC = gcc
-ARCHOPT = -arch x86_64
+#ARCHOPT = -arch x86_64
 #ARCHOPT = -arch i386
+ARCHOPT = -m64
 # FOPTS = -fcray-pointer $(ARCHOPT) -W
 FOPTS = -fcray-pointer $(ARCHOPT) -I ../../libdrs/lib -I ../include
 FFLAGS = $(DEBUG) $(FOPTS)
