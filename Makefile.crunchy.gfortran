@@ -20,12 +20,12 @@ FC = /usr/bin/gfortran
 CC = gcc
 #ARCHOPT = -arch x86_64
 #ARCHOPT = -arch i386
-ARCHOPT = -m64
+ARCHOPT = -m64 -mtune=native
 # FOPTS = -fcray-pointer $(ARCHOPT) -W
-FOPTS = -fcray-pointer $(ARCHOPT) -I ../../libdrs/lib -I ../include
+FOPTS = -fcray-pointer $(ARCHOPT) -W -Dgfortran -Dsun -D__linux -D__linux_gfortran -fpic -fPIC -I ../../libdrs/lib -I ../include -I ${UVCDAT_SETUP_PATH}/Externals/include
 FFLAGS = $(DEBUG) $(FOPTS)
-INSTALL_LIB = /usr/local/lib
-INSTALL_INC = /usr/local/include
+INSTALL_LIB = ${UVCDAT_SETUP_PATH}/Externals/lib
+INSTALL_INC = ${UVCDAT_SETUP_PATH}/Externals/include
 CPPFLAGS = $(ARCHOPT)
 CPP = cpp
 
@@ -52,7 +52,7 @@ lib${LIBNAME}.a: $(OBJECTS)
 	ar rv lib${LIBNAME}.a $?
 
 lib${LIBNAME}.so: $(OBJECTS)
-	$(CC) $(ARCHOPT) -lgfortran -L${CDMSLIB} -I${CDMSINC} -lcdms  -shared -o lib${LIBNAME}.so $(OBJECTS)
+	$(CC) $(ARCHOPT) -lgfortran -L${UVCDAT_SETUP_PATH}/Externals/lib -L${CDMSLIB} -I${CDMSINC} -lcdms  -shared -o lib${LIBNAME}.so $(OBJECTS)
 
 #--------------------------------------------------------------------
 
