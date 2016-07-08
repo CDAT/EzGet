@@ -16,7 +16,7 @@ CDMSINC = ${UVCDAT_SETUP_PATH}/Externals/include
 DEBUG = -O 
 # DEBUG = -g -save-temps -O0
 # Requires Absoft FORTRAN
-FC = /usr/local/bin/gfortran
+FC = gfortran
 CC = gcc
 #ARCHOPT = -arch x86_64
 #ARCHOPT = -arch i386
