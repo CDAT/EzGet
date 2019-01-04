@@ -16,18 +16,18 @@ CDMSINC = @cdat_EXTERNALS@/include
 DEBUG = -O 
 # DEBUG = -g -save-temps -O0
 # Requires Absoft FORTRAN
-FC = gfortran
-CC = gcc
+#FC = gfortran
+#CC = gcc
 #ARCHOPT = -arch x86_64
 #ARCHOPT = -arch i386
-ARCHOPT = -m64 -mtune=native
+#ARCHOPT = -m64 -mtune=native
 # FOPTS = -fcray-pointer $(ARCHOPT) -W
 FOPTS = -fcray-pointer $(ARCHOPT) -W -Dgfortran -Dsun -D__linux -D__linux_gfortran -fpic -fPIC -I ../../libdrs/lib -I ../include -I @cdat_EXTERNALS@/include
-FFLAGS = $(DEBUG) $(FOPTS)
+FFLAGS = $(FFLAGS) $(DEBUG) $(FOPTS)
 INSTALL_LIB = @cdat_EXTERNALS@/lib
 INSTALL_INC = @cdat_EXTERNALS@/include
-CPPFLAGS = $(ARCHOPT)
-CPP = cpp
+#CPPFLAGS = $(ARCHOPT)
+#CPP = cpp
 
 FOBJECTS = Src/$(LIBNAME).o
 FINCLUDES = drsdef.h drscom.h cycle.h
