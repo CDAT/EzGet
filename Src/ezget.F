@@ -111,7 +111,7 @@ c
 
       integer function applywts(ivar, amask)
 
-      implicit none
+c      implicit none
 #include "usersget"
 #include "cvartbl"
 #include "cdimtbl"
@@ -242,7 +242,7 @@ c    The only exception to this is if 1 string is null or completely
 c    blank; then equivalence requires both strings to be null or
 c    completely blank.   
 
-      implicit none
+c      implicit none
       character*(*) a, b
       character*1 c, d
       integer i, j, k, m, n, j1, k1, ii, j2, k2
@@ -350,7 +350,7 @@ c ccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
 
 c      common variables
 
-      implicit none
+c     implicit none
 #include "drsdef.h"
 #include "fcddrs.h"
 
@@ -418,7 +418,7 @@ c ccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
 
       subroutine clrtable
 
-      implicit none
+c     implicit none
 #include "usersget"
 #include "cdimtbl"
 #include "cvartbl"
@@ -532,7 +532,7 @@ c ccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
      +         bdry2, dcycle) 
 
 c ???  check the following include statements
-      implicit none
+c     implicit none
 #include "usersget"
 #include "cvartbl"
 #include "cdimtbl"
@@ -893,7 +893,7 @@ c ccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
       subroutine defdimi(ivar, idim, name, weight, indx1, indx2) 
 
 c ???  check the following include statements
-      implicit none
+c     implicit none
 #include "usersget"
 #include "cvartbl"
 #include "cdimtbl"
@@ -1268,7 +1268,7 @@ c ccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
          
 c ??? check following includes
 c    need: all, maxvars, ishowin, ishowout, igeogin, igeogout, varnam
-      implicit none
+c     implicit none
 #include "usersget"
 #include "cscalars"
 #include "cvartbl"
@@ -1993,7 +1993,7 @@ c ccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
 
       subroutine defmisc(param, type, value)
 
-      implicit none
+c     implicit none
 #include "usersget"
 #include "cscalars"
 
@@ -2315,7 +2315,7 @@ c ccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
       subroutine defregrd(ivar, targtype, itarg, method, nlat, alat, 
      +         dellat, nlon, alon, dellon)
 
-      implicit none
+c     implicit none
 #include "usersget"
 #include "cvartbl"
 
@@ -2482,7 +2482,7 @@ c ccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
 
       subroutine defvar(ii, varname, filename)
 
-      implicit none
+c     implicit none
 
 c      common variables
 
@@ -2621,7 +2621,7 @@ c ccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
 
       subroutine defvarex(ivar, varname, vtitle, vsource, filename)
 
-      implicit none
+c     implicit none
 #include "usersget"
 #include "cvartbl"
 
@@ -2682,7 +2682,7 @@ c ccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
 
       subroutine diminfo(ivar, idim, param, info)
 
-      implicit none
+c     implicit none
 #include "usersget"
 #include "cvartbl"
 #include "cdimtbl"
@@ -2929,7 +2929,7 @@ c ccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
 
       subroutine domain(ivar, ndim, dnames, beg, end)
 
-      implicit none
+c     implicit none
 #include "usersget"
 #include "cvartbl"
 
@@ -3015,7 +3015,7 @@ c ccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
 
       subroutine domlimit(ivar, dim, beg, end)
 
-      implicit none
+c     implicit none
 #include "usersget"
 #include "cvartbl"
 #include "cdimtbl"
@@ -3085,7 +3085,7 @@ c ccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
       integer function doregrid(ivar, amaskin, arrayin, amask, array)
 
           
-      implicit none
+c     implicit none
 #include "usersget"
 #include "cscalars"
 #include "cvartbl"
@@ -3598,7 +3598,7 @@ c ccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
  
       subroutine errcheck(sub, from, iadd)
 
-      implicit none
+c     implicit none
 #include "cscalars"
 
       integer iadd
@@ -3685,7 +3685,7 @@ c ccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
 
 c      common variables
 
-      implicit none
+c     implicit none
 #include "cscalars"
 #include "cdomain"
       
@@ -4192,7 +4192,7 @@ c     ----
 c     
 c ccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
 
-      implicit none
+c     implicit none
 #include "usersget"
 #include "cvartbl"
 #include "cdimtbl"   
@@ -4323,7 +4323,7 @@ c ccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
       subroutine getdata(ivar, ndim1, ndim2, ndim3, ndim4, 
      +                        len1,  len2,  len3,  len4, amask, array)
      
-      implicit none
+c     implicit none
 #include "usersget"
 #include "cvartbl"  
 #include "cdomain"  
@@ -4583,7 +4583,7 @@ c ccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
 
 c      common variables
           
-      implicit none
+c     implicit none
 #include "drsdef.h"
 #include "fcddrs.h"
 
@@ -5112,7 +5112,7 @@ c     ----
 c     
 c ccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
 
-      implicit none
+c     implicit none
 #include "usersget"
 #include "cvartbl"
 #include "cdimtbl"   
@@ -5195,7 +5195,7 @@ c     ----
 c     
 c ccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
 
-      implicit none
+c     implicit none
 #include "usersget"
 #include "cvartbl"
 #include "cdimtbl"   
@@ -5283,7 +5283,7 @@ c ccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
 
 c      common variables
 
-      implicit none
+c     implicit none
 #include "usersget"
 #include "cvartbl"
 #include "cdomain"
@@ -5383,7 +5383,7 @@ c ccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
 
 c      common variables
 
-      implicit none
+c     implicit none
 #include "drsdef.h"
 #include "fcddrs.h"
 
@@ -5986,7 +5986,7 @@ c ccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
       subroutine getgeog(ivar, ndim1, ndim2, ndim3, ndim4, 
      +                        len1, len2, len3, len4, amask, select)
      
-      implicit none
+c     implicit none
 #include "usersget"
 #include "cvartbl"  
 #include "cdomain"  
@@ -6256,7 +6256,7 @@ c ccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
 
       subroutine getnogap(ivar, len, amask, array)
 
-      implicit none
+c     implicit none
 #include "cscalars"
      
       integer ivar, len, lendatal
@@ -6310,7 +6310,7 @@ c ccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
 
 c      common variables
 
-      implicit none
+c     implicit none
 #include "usersget"
 #include "cscalars"
 #include "cvartbl"
@@ -6841,7 +6841,7 @@ c ccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
 
       subroutine initget()
           
-      implicit none
+c     implicit none
 #include "drsdef.h"
 #include "fcddrs.h"
 
@@ -6997,7 +6997,7 @@ c ccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
 
       subroutine lendims(ivar, i1, i2, i3, i4, ii)
            
-      implicit none
+c     implicit none
 #include "usersget"
 #include "cvartbl"
 #include "cdimtbl"
@@ -7103,7 +7103,7 @@ c
 c  *********************************************************************
 
      
-      implicit none
+c     implicit none
       integer nloni, nlono, nlati, nlato, londx(nlono), lonpt(*), 
      &       latdx(nlato), latpt(*) 
       real  bnin(nlati), bnout(nlato), bsin(nlati), bsout(nlato)
@@ -7306,7 +7306,7 @@ c ccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
 
 c      common variables
           
-      implicit none
+c     implicit none
 #include "usersget"
 #include "cdimtbl"
 
@@ -7488,7 +7488,7 @@ c ccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
       integer function opendrs(ivar, ierrcntl, idicun)
 
 
-      implicit none
+c     implicit none
 #include "drsdef.h"
 #include "fcddrs.h"
 
@@ -7738,7 +7738,7 @@ c
 c  *********************************************************************
 c
 
-      implicit none
+c     implicit none
       pointer (p1, accum), (p2, wtmsk)
       integer  nloni, nlono, nlati, nlato
       integer londx(nlono), lonpt(*), latdx(nlato), latpt(*)
@@ -8014,7 +8014,7 @@ c
 
       subroutine shape(ivar, idim1, idim2, idim3, idim4, lentot)
 
-      implicit none
+c     implicit none
 #include "cscalars" 
 
       integer ivar, idim1, idim2, idim3, idim4, lentot, lendatal, 
@@ -8064,7 +8064,7 @@ c ccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
 
       integer function univunit(namedim)
 
-      implicit none
+c     implicit none
 #include "cscalars"
 
       character*16 namedim
@@ -8109,7 +8109,7 @@ c ccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
 
       subroutine varinfo(ivar, param, info)
 
-      implicit none
+c     implicit none
 #include "usersget"
 #include "cvartbl"
 #include "cdimtbl"
@@ -8270,7 +8270,7 @@ c ccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
 
 c      common variables
 
-      implicit none
+c     implicit none
 #include "drsdef.h"
 #include "fcddrs.h"
 
@@ -8772,7 +8772,7 @@ c ccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
 
 c      common variables
 
-      implicit none
+c     implicit none
 #include "cscalars"
 
       integer ishowd, jj
