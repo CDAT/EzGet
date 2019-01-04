@@ -23,7 +23,7 @@ DEBUG = -O
 #ARCHOPT = -m64 -mtune=native
 # FOPTS = -fcray-pointer $(ARCHOPT) -W
 FOPTS = -fcray-pointer $(ARCHOPT) -W -Dgfortran -Dsun -D__linux -D__linux_gfortran -fpic -fPIC -I ../../libdrs/lib -I ../include -I @cdat_EXTERNALS@/include
-FFLAGS = $(FFLAGS) $(DEBUG) $(FOPTS)
+#FFLAGS = $(FFLAGS) $(DEBUG) $(FOPTS)
 INSTALL_LIB = @cdat_EXTERNALS@/lib
 INSTALL_INC = @cdat_EXTERNALS@/include
 #CPPFLAGS = $(ARCHOPT)
