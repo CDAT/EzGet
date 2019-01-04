@@ -111,7 +111,7 @@ c
 
       integer function applywts(ivar, amask)
 
-      implicit none
+c      implicit none
 #include "usersget"
 #include "cvartbl"
 #include "cdimtbl"
